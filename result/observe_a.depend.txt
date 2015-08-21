@@ -1,0 +1,28 @@
+Input sentence:644
+
+Extracted Pattern <13>
+🐾 observe 【advcl】 
+
+🐾 observe to 【xcomp】 
+
+🐾 observe 【dobj】【conj_but】 
+
+🐾 observe 【conj_and】【dobj】to 【prep_to】 
+
+🐾 observe 【dobj】【prep_at】 
+
+🐾 observe 【ccomp】【nsubj】 
+
+🐾 observe 【advmod】【conj_and】【conj_and】 
+
+🐾 observe 【advmod】【dobj】 
+
+🐾 observe 【dobj】【advmod】 
+
+🐾 observe 【prep_as】 
+
+🐾 observe 【advmod】【ccomp】 
+
+🐾 observe 【xcomp】 
+
+🐾 observe 【conj_or】 

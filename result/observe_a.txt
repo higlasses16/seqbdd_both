@@ -1,0 +1,109 @@
+defaultencoding :  utf-8
+Input sentence:596
+
+seqbdd make:2.23803200 [sec]
+
+SeqBDD=>Digraph:0.12674200 [sec]
+
+rank edges:0.30854300 [sec]
+nodes: 270
+edges: 269
+
+remove 1-edges:0.04441100 [sec]
+
+Node Compress:0.00758900 [sec]
+
+******Patterns******
+
+
+Extracted Pattern <42>
+🐾 observe 【dobj】【IN】the 【prep_in】 
+
+🐾 observe the 【JJ】【dobj】of 【JJ】 
+
+🐾 observe 【dobj】-LRB-  
+
+🐾 observe the 【dobj】and  
+
+🐾 observe 【NNP】【dobj】 
+
+🐾 observe the 【JJ】【dobj】of the  
+
+🐾 observe 【PRP$】【dobj】,  
+
+🐾 observe 【IN】【PRP】 
+
+🐾 observe how 【PRP$】 
+
+🐾 observe 【IN】the 【prep_in】 
+
+🐾 observe the 【dobj】【IN】【PRP$】 
+
+🐾 observe 【PRP$】【JJ】 
+
+🐾 observe 【dobj】, 【PRP】【VBZ】 
+
+🐾 observe 【IN】the 【NN】of the  
+
+🐾 observe 【JJ】【JJ】 
+
+🐾 observe the 【dobj】【IN】the 【JJ】【NNS】 
+
+🐾 observe the 【dobj】【IN】【JJ】【NN】 
+
+🐾 observe what was going  
+
+🐾 observe what 【PRP】【ccomp】 
+
+🐾 observe the 【JJ】【JJ】 
+
+🐾 observe 【NN】【dobj】and  
+
+🐾 observe and 【conj_and】【DT】【dobj】 
+
+🐾 observe 【dobj】【VBG】【IN】the  
+
+🐾 observe the 【dobj】【IN】【JJ】【NNS】 
+
+🐾 observe 【RB】【JJ】 
+
+🐾 observe 【advmod】,  
+
+🐾 observe the 【dobj】【VBN】【IN】【PRP$】 
+
+🐾 observe the 【dobj】【IN】【NNP】 
+
+🐾 observe 【VBG】【dobj】 
+
+🐾 observe the 【NNS】 
+
+🐾 observe 【NNS】 
+
+🐾 observe 【dobj】【advmod】 
+
+🐾 observe the 【dobj】【IN】the 【JJ】【NN】 
+
+🐾 observe the 【dobj】【IN】【NN】 
+
+🐾 observe 【NNP】's 【dobj】 
+
+🐾 observe 【IN】I can see no inconsistency between English law on this subject and article 10 of the European Convention on Human Rights  
+
+🐾 observe and 【VB】 
+
+🐾 observe what is going  
+
+🐾 observe two  
+
+🐾 observe 【JJ】【dobj】,  
+
+🐾 observe is  
+
+🐾 observe the 【NN】's 【dobj】 
+
+
+Get Patterns:0.01772600 [sec]
+
+Draw Graph to png-file:0.17860700 [sec]
+
+******************** FINISH input/observe.input.txt ********************

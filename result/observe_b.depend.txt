@@ -1,0 +1,143 @@
+Input text:644
+
+seqbdd make:1.90968900 [sec]
+
+SeqBDD to netx_Digraph:0.03346500 [sec]
+
+rank edges:0.64375700 [sec]
+nodes: 141
+edges: 156
+
+remove 1-edges:0.00364000 [sec]
+
+node compress:0.00589500 [sec]
+
+******Patterns******
+
+
+Extracted Pattern <63>
+🐾 【xsubj】to【xsubj】【xcomp】to 
+
+🐾 toto【xcomp】to 
+
+🐾 【mark】【nsubj】to 
+
+🐾 【aux】not【advmod】 
+
+🐾 where【nsubj】to 
+
+🐾 【xcomp】【nsubj】to 
+
+🐾 【nsubj】【aux】 
+
+🐾 【rcmod】 
+
+🐾 【xsubj】【xsubj】【xsubj】【xcomp】to 
+
+🐾 【advmod】【nsubj】to 
+
+🐾 【dep】 
+
+🐾 【conj_and】【nsubj】to 
+
+🐾 【parataxis】【advmod】【nsubj】 
+
+🐾 【nsubj】could【advmod】 
+
+🐾 【ccomp】 
+
+🐾 【dobj】【xsubj】【xcomp】to 
+
+🐾 what【nsubj】 
+
+🐾 【dep】【aux】 
+
+🐾 【infmod】【conj_and】 
+
+🐾 rightto 
+
+🐾 【dobj】【nsubj】【advmod】 
+
+🐾 【xcomp】to 
+
+🐾 【xsubj】【xcomp】toto 
+
+🐾 toto【xcomp】【nsubj】to 
+
+🐾 【advmod】【nsubj】 
+
+🐾 【advcl】【mark】【nsubj】【aux】not 
+
+🐾 【mark】【nsubj】 
+
+🐾 【advcl】【mark】【nsubj】 
+
+🐾 【advcl】【mark】【nsubj】to 
+
+🐾 【mark】【nsubj】【aux】not 
+
+🐾 【conj_and】【nsubj】【conj_and】 
+
+🐾 【mark】【nsubj】【advmod】 
+
+🐾 【dep】as【nsubj】 
+
+🐾 【nsubj】【nsubj】to 
+
+🐾 【dep】【nsubj】【aux】 
+
+🐾 【rcmod】we 
+
+🐾 【ccomp】【nsubj】【conj_and】 
+
+🐾 howto 
+
+🐾 【xsubj】【xsubj】【xcomp】to 
+
+🐾 to【conj_and】to 
+
+🐾 【ccomp】that【nsubj】【aux】 
+
+🐾 【prep_in】we 
+
+🐾 【rcmod】【nsubj】 
+
+🐾 【nsubj】【advmod】 
+
+🐾 【advmod】【nsubj】 
+
+🐾 【dobj】【nsubj】 
+
+🐾 【advmod】【nsubj】【aux】【advmod】 
+
+🐾 【nsubj】 
+
+🐾 IIableto【xsubj】【xsubj】【xcomp】to 
+
+🐾 【dobj】【nsubj】to 
+
+🐾 【ccomp】【nsubj】 
+
+🐾 【prep_in】【nsubj】to 
+
+🐾 【conj_and】 
+
+🐾 【xsubj】【xcomp】to 
+
+🐾 【aux】 
+
+🐾 【ccomp】that【nsubj】【aux】not 
+
+🐾 【mark】【ccomp】【nsubj】to 
+
+🐾 【advmod】【advmod】 
+
+🐾 【nsubj】【aux】not【advmod】 
+
+🐾 【conj_and】【nsubj】 
+
+🐾 that【ccomp】thatweto 
+
+🐾 to【xcomp】to 
+
+🐾 【rcmod】we【conj_and】 

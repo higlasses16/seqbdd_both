@@ -1,0 +1,239 @@
+🐾 【dobj】【nsubj】to 
+
+🐾 【advmod】【nsubj】 
+
+🐾 【MD】【RB】be【xcomp】to 
+
+🐾 【mark】to 
+
+🐾 【IN】【NNP】【xcomp】to 
+
+🐾 and【xcomp】to 
+
+🐾 which【nsubj】to 
+
+🐾 【NN】【IN】【infmod】to 
+
+🐾 ,【nsubj】【advmod】 
+
+🐾 acovenant【IN】【DT】【infmod】to 
+
+🐾 【NNP】to 
+
+🐾 【xcomp】【DT】【NN】【RB】to 
+
+🐾 【nsubj】【advmod】 
+
+🐾 ,【CC】【dep】【nsubj】 
+
+🐾 【NNP】【nsubj】to 
+
+🐾 【NN】【VBD】【DT】【infmod】to 
+
+🐾 【NN】,and 
+
+🐾 【IN】【xsubj】are【xcomp】to 
+
+🐾 【xcomp】to 
+
+🐾 was【xcomp】to 
+
+🐾 【xsubj】hadbeen【xcomp】to 
+
+🐾 【IN】【NN】,【nsubj】 
+
+🐾 【rcmod】【nsubj】to 
+
+🐾 and【advmod】 
+
+🐾 the【nsubj】 
+
+🐾 To 
+
+🐾 【nsubj】donot【advmod】 
+
+🐾 【IN】【DT】【NN】of【NNS】to 
+
+🐾 【NN】【mark】【nsubj】 
+
+🐾 【IN】【JJ】【NNS】, 
+
+🐾 【VB】【RB】,【xcomp】【RB】to 
+
+🐾 【NN】andto 
+
+🐾 【IN】【DT】【NNS】to 
+
+🐾 【RB】【RB】【xcomp】to 
+
+🐾 【mark】【nsubj】 
+
+🐾 【NNS】,【nsubj】to 
+
+🐾 which【xsubj】【xcomp】to 
+
+🐾 【VB】【DT】【infmod】to 
+
+🐾 【IN】【dobj】【nsubj】 
+
+🐾 【ccomp】howto 
+
+🐾 【rcmod】, 
+
+🐾 【NNS】【mark】【nsubj】 
+
+🐾 【NN】【xsubj】is【xcomp】to 
+
+🐾 【NNS】【xcomp】to 
+
+🐾 【NN】【xcomp】【nsubj】to 
+
+🐾 【xsubj】will【xcomp】to 
+
+🐾 【IN】【nsubj】 
+
+🐾 【PRP$】【NNS】and 
+
+🐾 【IN】the【JJ】【NN】to 
+
+🐾 it【MD】be【xcomp】to 
+
+🐾 【ccomp】【mark】【nsubj】to 
+
+🐾 to【xcomp】【nsubj】to 
+
+🐾 andthe【nsubj】to 
+
+🐾 【NNP】【ccomp】to 
+
+🐾 【NN】the【nsubj】to 
+
+🐾 【JJ】【NNS】,andto 
+
+🐾 【JJ】【nsubj】to 
+
+🐾 【NN】,【nsubj】【aux】【advmod】 
+
+🐾 【NNP】,【nsubj】 
+
+🐾 【NNS】【IN】【DT】【NN】to 
+
+🐾 the【NNS】of【rcmod】【nsubj】 
+
+🐾 which【nsubj】【advmod】 
+
+🐾 however,【xcomp】to 
+
+🐾 The【infmod】to 
+
+🐾 【NN】,to 
+
+🐾 When【nsubj】 
+
+🐾 【mark】【nsubj】【aux】not 
+
+🐾 【xsubj】was【RB】【xcomp】to 
+
+🐾 【xcomp】【JJ】【NNS】to 
+
+🐾 【WRB】【xsubj】【xcomp】to 
+
+🐾 【IN】which【nsubj】 
+
+🐾 to【xcomp】to 
+
+🐾 【NN】of【PRP$】【infmod】to 
+
+🐾 【DT】【xcomp】【nsubj】to 
+
+🐾 herto 
+
+🐾 ,to【conj_and】and 
+
+🐾 【xcomp】the【JJ】【NN】to 
+
+🐾 【JJ】【NN】【NNS】to 
+
+🐾 【ETC】【nsubj】 
+
+🐾 【NN】 
+
+🐾 tobe【xcomp】to 
+
+🐾 a【JJ】【infmod】to 
+
+🐾 【xsubj】is【RB】【xcomp】to 
+
+🐾 Other【nsubj】 
+
+🐾 【IN】【NN】,【mark】【nsubj】 
+
+🐾 【RB】【IN】to 
+
+🐾 【NNP】 
+
+🐾 【DT】【infmod】to【conj_and】and 
+
+🐾 【IN】【NN】to 
+
+🐾 and【nsubj】【aux】【advmod】 
+
+🐾 【NNS】【xsubj】is【xcomp】to 
+
+🐾 【JJ】【xsubj】【xcomp】to 
+
+🐾 【nsubj】 
+
+🐾 and【xsubj】was【xcomp】to 
+
+🐾 【VBZ】【DT】【infmod】to 
+
+🐾 Failureto 
+
+🐾 【ccomp】【nsubj】 
+
+🐾 the【xsubj】【xcomp】to 
+
+🐾 sit【RB】and 
+
+🐾 ,【RB】,to 
+
+🐾 the【xsubj】was【xcomp】to 
+
+🐾 【nsubj】could【advmod】 
+
+🐾 where【nsubj】to 
+
+🐾 【RB】,but【nsubj】to 
+
+🐾 and【nsubj】 
+
+🐾 【xsubj】【xcomp】to 
+
+🐾 【NNS】andto 
+
+🐾 【JJ】【NNS】【IN】【DT】【infmod】to 
+
+🐾 【dep】to 
+
+🐾 【advcl】【mark】【nsubj】to 
+
+🐾 Itis【xcomp】to 
+
+🐾 【DT】【JJ】【NN】and 
+
+🐾 the【NN】and 
+
+🐾 【NN】【NN】【NN】, 
+
+🐾 【JJ】to 
+
+🐾 【VBP】【RB】【xcomp】to 
+
+🐾 【IN】being【xcomp】to 
+
+🐾 【NN】【xsubj】was【xcomp】to 
+
+🐾 【xcomp】【nsubj】to 
+
+🐾 【IN】【dobj】【nsubj】to 
