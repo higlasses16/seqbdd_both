@@ -248,6 +248,7 @@ class Node:
 			print '\n******Patterns******\n'
 			print '\nExtracted Pattern <%i>' %len(roots)
 		i = 0
+		Ext_Patterns = []
 		for n in roots:
 			pattern = []
 			if nx.has_path(G, n, '1'):
@@ -257,8 +258,10 @@ class Node:
 					else:
 						label = G.node[p]['label'].split(r'\n')[:-1]
 						pattern.append('%s:{%s}' %(label[0].split('(')[0], ', '.join(label[1:])))
-			print '%d:' %i, u'//'.join(pattern)
+			# print '%d:' %i, u'//'.join(pattern)
+			Ext_Patterns.append(u'//'.join(pattern))
 			i += 1
+		return Ext_Patterns
 
 	def get_patterns_a(self, snts, query):
 		leaves = []
@@ -303,7 +306,7 @@ class Node:
 						label = G.node[p]['label'].split(r'\n')[:-1]
 						pattern.append('<%s>:{%s}' %(label[0].split('(')[0], ', '.join(label[1:])))
 			# print '%d:' %i, u'//'.join(pattern)
-			Ext_Patterns.append(pattern)
+			Ext_Patterns.append(u'//'.join(pattern))
 
 			i += 1
 		return snt_divide, Ext_Patterns

@@ -232,7 +232,7 @@ def main(fn):
 	after_tree.reset_graph()
 	print '\n~~~~~~~FINISH AFTER PATTERN~~~~~~~~~~\n\n'
 
-	
+	all_pattern = []
 	for i, before_query in before_query_list.items():
 		# before_query = []
 		# for i in range(len(word_with_tag)):
@@ -260,10 +260,11 @@ def main(fn):
 
 		#パターンを抽出
 		print "***後半パターン***\n\n"
-		pprint.pprint(patterns[i])
 
-		before_tree.get_patterns_b()
+		before_patterns = before_tree.get_patterns_b()
 
+		for p in before_patterns:
+			all_pattern.append(patterns[i] + u'//' + p)
 
 		#画像ファイルに出力
 		# s = time.clock()
@@ -274,7 +275,9 @@ def main(fn):
 		print '*'*20 ,'FINISH %s\n' %fn, '*'*20
 
 		before_tree.reset_graph()
-	
+	for p in all_pattern:
+		print p
+
 
 if __name__ == '__main__':
 	# main(sys.argv[1])
