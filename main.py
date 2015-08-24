@@ -223,7 +223,6 @@ def main(fn):
 
 	#パターンを抽出
 	before_query_list, patterns = after_tree.get_patterns_a(word_with_tag, query)
-	# pprint.pprint(patterns)
 
 	#画像ファイルに出力
 	# after_tree.draw_graph(query+'test', 'a')
@@ -235,7 +234,6 @@ def main(fn):
 
 	
 	for i, before_query in before_query_list.items():
-
 		# before_query = []
 		# for i in range(len(word_with_tag)):
 		# 	for j in range(len(word_with_tag[i])):
@@ -253,8 +251,6 @@ def main(fn):
 		#入力文を使って枝を重み付け&ノードのラベル付け
 		for sentence in rank_b:
 			before_tree.rank(sentence)
-		before_tree.draw_graph('before_test', 'b')
-
 
 		#1−枝をすべて削除
 		before_tree.remove_rank1()
@@ -271,7 +267,7 @@ def main(fn):
 
 		#画像ファイルに出力
 		# s = time.clock()
-		# before_tree.draw_graph(query, 'b')
+		before_tree.draw_graph(query + u'%d' %i, 'b')
 		# e = time.clock()
 		# print "\nDraw Graph to png-file:%.8f [sec]\n" %(e - s)
 

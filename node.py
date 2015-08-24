@@ -315,7 +315,6 @@ class Node:
 		# g.write("dot/test.dot")
 		# file_n = name.split('.')[-2]
 		g.draw("img/%s_%s.png" %(name, mode), prog='dot')
-		G.clear()
 
 	def test_print(self):
 		if self.left:
