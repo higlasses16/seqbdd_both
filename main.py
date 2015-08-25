@@ -230,7 +230,7 @@ def main(fn):
 	# print '*'*20 ,'FINISH %s' %fn, '*'*20
 
 	after_tree.reset_graph()
-	print '\n~~~~~~~FINISH AFTER PATTERN~~~~~~~~~~\n\n'
+	# print '\n~~~~~~~FINISH AFTER PATTERN~~~~~~~~~~\n\n'
 
 	all_pattern = []
 	for i, before_query in before_query_list.items():
@@ -259,12 +259,12 @@ def main(fn):
 		before_tree.node_comp(query)
 
 		#パターンを抽出
-		print "***後半パターン***\n\n"
+		# print "***後半パターン***\n\n"
 
 		before_patterns = before_tree.get_patterns_b()
-
+	
 		for p in before_patterns:
-			all_pattern.append(patterns[i] + u'//' + p)
+			all_pattern.append(patterns[i] + u'//' + p + u'\n')
 
 		#画像ファイルに出力
 		# s = time.clock()
@@ -272,11 +272,12 @@ def main(fn):
 		# e = time.clock()
 		# print "\nDraw Graph to png-file:%.8f [sec]\n" %(e - s)
 
-		print '*'*20 ,'FINISH %s\n' %fn, '*'*20
+		# print '*'*20 ,'FINISH %s\n' %fn, '*'*20
 
 		before_tree.reset_graph()
-	for p in all_pattern:
-		print p
+
+	with codecs.open('%s.full.txt' %query, 'w', 'utf-8') as f:	
+		f.writelines(all_pattern)
 
 
 if __name__ == '__main__':

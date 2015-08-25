@@ -216,8 +216,8 @@ class Node:
 				G.remove_node(node)
 		if G.predecessors('1') == []:
 			G.remove_node('1')
-		print 'nodes:',G.number_of_nodes()
-		print 'edges:',G.number_of_edges()
+		# print 'nodes:',G.number_of_nodes()
+		# print 'edges:',G.number_of_edges()
 
 	def node_comp(self, query):
 		for n in G.nodes():
@@ -242,11 +242,11 @@ class Node:
 		# for n in nx.ancestors(G, '1'):
 			elif G.predecessors(n) == []:
 				roots.append(n)
-		if roots == []:
-			print '\n******No Pattern******\n'
-		else:
-			print '\n******Patterns******\n'
-			print '\nExtracted Pattern <%i>' %len(roots)
+		# if roots == []:
+			# print '\n******No Pattern******\n'
+		# else:
+			# print '\n******Patterns******\n'
+			# print '\nExtracted Pattern <%i>' %len(roots)
 		i = 0
 		Ext_Patterns = []
 		for n in roots:
@@ -272,11 +272,11 @@ class Node:
 		# for n in nx.descendants(G, root_name):
 			elif G.successors(n) == []:
 				leaves.append(n)
-		if leaves == []:
-			print '\n******No Pattern******\n'
-		else:
-			print '\n******Patterns******\n'
-			print '\nExtracted Pattern <%i>' %len(leaves)
+		# if leaves == []:
+			# print '\n******No Pattern******\n'
+		# else:
+			# print '\n******Patterns******\n'
+			# print '\nExtracted Pattern <%i>' %len(leaves)
 
 		#入力文章を振り分ける
 		snt_divide = defaultdict(list)
