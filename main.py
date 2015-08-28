@@ -67,29 +67,70 @@ def core_nlp_parser(file, query):
 	for i, line in enumerate(snt):
 		if len(line) > 400:
 			continue
+		elif u'!' in line or u'?' in line:
+			continue
 		line = line.strip()
 		line_tagged = []
 		result_nlp = json.loads(parser.parse(line))
-		dependencies = [d for d in result_nlp[u'sentences'][0][u'dependencies'][:] if query in d]
+		dependencies = [d for d in result_nlp[u'sentences'][0][u'indexeddependencies'][:]]
+		for i, d in enumerate(dependencies):
+			dependencies[i] = {
+				'tag'  : d[0],
+				'w1'   : d[1].split(u'-')[0],
+				'w1_i' : d[1].split(u'-')[1],
+				'w2'   : d[2].split(u'-')[0],
+				'w2_i' : d[2].split(u'-')[1]
+				}
 		for d in dependencies:
-			d.remove(query)
-
-		for i, w in enumerate([x[1]['Lemma'] for x in result_nlp[u'sentences'][0][u'words']]):
-			for d in dependencies:
-				if w == query:
-					line_tagged.append((w, 'TARGET'))
-					break
-				elif w in d:
-					line_tagged.append((w, d[0]))
-					break
+			if d['w1'] == query:
+				del d['w1']
+				query_index = int(d.pop('w1_i'))
+				try:
+					d['index'] = int(d.pop('w2_i'))
+					d['word'] = d.pop('w2')
+				except ValueError:
+					d.clear()
+			elif d['w2'] == query:
+				del d['w2']
+				query_index = int(d.pop('w2_i'))
+				try:
+					d['word'] = d.pop('w1')
+					d['index'] = int(d.pop('w1_i'))
+				except ValueError:
+					d.clear()
 			else:
-				#文章全部をPOSで入力するとき
-				# line_tagged.append((w, result_nlp[u'sentences'][0][u'words'][i][1][u'PartOfSpeech']))
+				d.clear()
+		while dependencies.count({}) > 0:
+			dependencies.remove({})
 
-				#TARGET動詞との関係がある単語のみのとき
-				pass
+		lemmas = [x[1]['Lemma'] for x in result_nlp[u'sentences'][0][u'words']]
+		dependencies.append({'tag':'TARGET', 'word':query, 'index':query_index})
+		print lemmas
+
+		for dic in sorted(dependencies, key=lambda x: x['index']):
+			print dic
+			if dic['word'] == query:
+				print lemmas[dic['index']-1], 'TARGET'
+				line_tagged.append((lemmas[dic['index']-1], 'TARGET'))
+			else:
+				print lemmas[dic['index']-1], dic['tag']
+				line_tagged.append((lemmas[dic['index']-1], dic['tag']))
+
+		# for i, w in enumerate([x[1]['Lemma'] for x in result_nlp[u'sentences'][0][u'words']]):
+		# 	if w == query:
+		# 		line_tagged.append((w, 'TARGET'))
+		# 		continue
+		# 	for d in dependencies:
+		# 		if w in d:
+		# 			line_tagged.append((w, d[0]))
+		# 			break
+		# 	else:
+		# 		#文章全部をPOSで入力するとき
+		# 		# line_tagged.append((w, result_nlp[u'sentences'][0][u'words'][i][1][u'PartOfSpeech']))
+
+		# 		#TARGET動詞との関係がある単語のみのとき
+		# 		pass
 		tagged.append(line_tagged)
-	print 'Input text:%d' %len(tagged)
 	return tagged
 
 def nltk_tagger(file):
@@ -173,6 +214,20 @@ def set_list(nest):
 			temp.append(words)
 	return temp
 
+def pickle_write(obj, name):
+	with open('./pickle/%s.pickle' %name, 'w') as f:
+			pickle.dump(obj, f)
+
+def pickle_load(name):
+	with open('./pickle/%s.pickle' %name, 'r') as f:
+			return pickle.load(f)
+
+def reset():
+	global cache
+	cache = {}
+	after_tree = None
+	before_tree = None
+
 def main(fn):
 	"""入力文の整備→SeqBDD作成"""
 	# s = time.clock()
@@ -182,17 +237,18 @@ def main(fn):
 	# else:
 	query = u'observe'
 		# word_with_tag = nltk_tagger(fn)
-		# word_with_tag = core_nlp_parser(fn, query)
+	# word_with_tag = core_nlp_parser(fn, query)
+		#parseした入力をpickleでファイル出力しておく
+	# pickle_write(word_with_tag, 'observe')
+	# s = time.clock()
+	# 	#pickleファイルを読み込んで、parse済みオブジェクトを取り出し
+	word_with_tag = pickle_load('observe')
+	# e = time.clock()
+	# print "\nREAD PICKLE FILE:%.8f [sec]\n" %(e - s)
 
-		# #parseした入力をpickleでファイル出力しておく
-		# with open('./pickle/%s.pickle' %query, 'w') as f:
-		# 	pickle.dump(word_with_tag, f)
-		# sys.exit()
+	print 'Input text:%d' %len(word_with_tag)
 
-		#pickleファイルを読み込んで、parse済みオブジェクトを取り出し
-	with open('./pickle/%s.pickle' %query, 'r') as f:
-		word_with_tag = pickle.load(f)
-
+	s = time.clock()
 	after_query = []
 	for i in range(len(word_with_tag)):
 		for j in range(len(word_with_tag[i])):
@@ -207,33 +263,65 @@ def main(fn):
 	rank_a = copy.deepcopy(after_numed)
 	after = set_list(remove_word(after_numed))
 	after_tree = seqbdd(after)
+	e = time.clock()
+	print "\nMAKE SEQBDD:%.8f [sec]\n" %(e - s)
 
+	s = time.clock()
 	#SeqBDDをNetworkXのDiGraphに変換
 	after_tree.make_digraph()
+	e = time.clock()
+	print "\nSEQBDD => DiGraph:%.8f [sec]\n" %(e - s)
 
+	s = time.clock()
 	#入力文を使って枝を重み付け&ノードのラベル付け
 	for sentence in rank_a:
 		after_tree.rank(sentence)
+	e = time.clock()
+	print "\nLABELED:%.8f [sec]\n" %(e - s)
 
+	s = time.clock()
 	#1−枝をすべて削除
 	after_tree.remove_rank1()
+	e = time.clock()
+	print "\nREMOVE 1-EDGES:%.8f [sec]\n" %(e - s)
 
+	s = time.clock()
 	#ノードラベルを圧縮
 	after_tree.node_comp(query)
+	e = time.clock()
+	print "\nNODE COMPRESS:%.8f [sec]\n" %(e - s)
 
+	s = time.clock()
 	#パターンを抽出
 	before_query_list, patterns = after_tree.get_patterns_a(word_with_tag, query)
+	e = time.clock()
+	print "\nPATTERN EXTRACTED:%.8f [sec]\n" %(e - s)
 
 	#画像ファイルに出力
-	# after_tree.draw_graph(query+'test', 'a')
+	after_tree.draw_graph(query+'test', 'a')
 
 	# print '*'*20 ,'FINISH %s' %fn, '*'*20
 
 	after_tree.reset_graph()
 	# print '\n~~~~~~~FINISH AFTER PATTERN~~~~~~~~~~\n\n'
 
+	# pickle_write(patterns, query+'_after_patterns')
+	# pickle_write(before_query_list, query+'_before_snt_list')
+
+	# patterns = pickle_load(query+'_after_patterns')
+	# before_query_list = pickle_load(query+'_before_snt_list')
+
+	print 'sum:', sum([len(x) for x in before_query_list.values()])
+	print len(patterns), len(before_query_list)
+	# print pp(before_query_list)
+
+	reset()
+
 	all_pattern = []
 	for i, before_query in before_query_list.items():
+		# print before_query
+		# print patterns[i]
+
 		# before_query = []
 		# for i in range(len(word_with_tag)):
 		# 	for j in range(len(word_with_tag[i])):
@@ -248,8 +336,13 @@ def main(fn):
 
 		before_tree.make_digraph()
 
+
 		#入力文を使って枝を重み付け&ノードのラベル付け
-		for sentence in rank_b:
+		for j, sentence in enumerate(rank_b):
+			# print sentence
+			# print i, j
+			# if i == 5 and j == 32:
+			# 	before_tree.draw_graph(query + 'before_test', 'b')
 			before_tree.rank(sentence)
 
 		#1−枝をすべて削除
@@ -259,7 +352,7 @@ def main(fn):
 		before_tree.node_comp(query)
 
 		#パターンを抽出
-		# print "***後半パターン***\n\n"
+		print "***後半パターン***\n\n"
 
 		before_patterns = before_tree.get_patterns_b()
 	
@@ -268,14 +361,16 @@ def main(fn):
 
 		#画像ファイルに出力
 		# s = time.clock()
-		before_tree.draw_graph(query + u'%d' %i, 'b')
+		# before_tree.draw_graph(query + u'%d' %i, 'b')
 		# e = time.clock()
 		# print "\nDraw Graph to png-file:%.8f [sec]\n" %(e - s)
 
 		# print '*'*20 ,'FINISH %s\n' %fn, '*'*20
 
 		before_tree.reset_graph()
+		reset()
 
+	# print all_pattern
 	with codecs.open('%s.full.txt' %query, 'w', 'utf-8') as f:	
 		f.writelines(all_pattern)
 

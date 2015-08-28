@@ -12,6 +12,8 @@ global parent, root
 parent = 0
 flag_0 = 0
 G = nx.DiGraph()
+global countt
+countt = 1
 
 class Node:
 	"""
@@ -51,17 +53,21 @@ class Node:
 		if self.left:
 			left_name = "%s//%s" %(self.left, self.left.data)
 			if not self.left.data == '0':
-				if self.left.data == '1':
-					G.add_node(node_name, label = self.data)
-					G.add_edge(node_name, '1', label = 0)
-				elif self == root:
+				# if self.left.data == '1':
+				# 	G.add_node(node_name, label = self.data)
+				# 	G.add_edge(node_name, '1', label = 0)
+				# el
+				if self == root:
 					G.add_node(node_name, label = self.data)
 					G.add_node(left_name, label = self.left.data)
 					G.add_edge(node_name, left_name, label = 0)
 				else:
 					self.search_parent0_2()		#0枝でなくなるまで親を探す
 					parent_name = "%s//%s" %(parent, parent.data)
-					G.add_node(left_name, label = self.left.data)
+					if self.left.data == '1':
+						left_name = '1'
+					else:
+						G.add_node(left_name, label = self.left.data)
 					if flag_0 == 1: 
 						G.add_edge(parent_name, left_name, label = 0)
 						global flag_0
@@ -171,8 +177,8 @@ class Node:
 	def rank(self, S, node = None):
 		if not node:
 			node = root
+		node_name = '%s//%s' %(node, node.data)
 		try:
-			node_name = '%s//%s' %(node, node.data)
 			left_name = '%s//%s' %(node.left, node.left.data)
 			word = '%s(%s)' %(S[0][1],S[0][2])
 			if G.node[node_name]['label'].split('\n')[0] == word:
@@ -202,7 +208,9 @@ class Node:
 			else:
 				self.left.rank(S, node.left)
 		except IndexError:
-			# print 'IndexError'
+			# print 'IndexError', countt
+			# global countt
+			# countt += 1
 			pass
 
 	def remove_rank1(self):
@@ -242,11 +250,11 @@ class Node:
 		# for n in nx.ancestors(G, '1'):
 			elif G.predecessors(n) == []:
 				roots.append(n)
-		# if roots == []:
-			# print '\n******No Pattern******\n'
-		# else:
-			# print '\n******Patterns******\n'
-			# print '\nExtracted Pattern <%i>' %len(roots)
+		if roots == []:
+			print '\n******No Pattern******\n'
+		else:
+			print '\n******Patterns******\n'
+			print '\nExtracted Pattern <%i>' %len(roots)
 		i = 0
 		Ext_Patterns = []
 		for n in roots:
@@ -270,26 +278,49 @@ class Node:
 			if not nx.has_path(G, root_name, n):
 				G.remove_node(n)
 		# for n in nx.descendants(G, root_name):
-			elif G.successors(n) == []:
+			elif n == '1':
+				pass
+			elif G.successors(n) == [] or G.successors(n) == ['1']:
 				leaves.append(n)
 		# if leaves == []:
-			# print '\n******No Pattern******\n'
+		# 	print '\n******No Pattern******\n'
 		# else:
-			# print '\n******Patterns******\n'
-			# print '\nExtracted Pattern <%i>' %len(leaves)
+		# 	print '\n******Patterns******\n'
+		# 	print '\nExtracted Pattern <%i>' %len(leaves)
+		p_path = []
+		for path in [nx.dijkstra_path(G, root_name, n) for n in leaves]:
+			p_path.append([p.split(u'//')[1][:-3] for p in path[1:]])
 
 		#入力文章を振り分ける
 		snt_divide = defaultdict(list)
+		prop_p = defaultdict(list)	#ここも
 		for s in snts:
+			temp_p = (-1, "")
 			before_t = sum([s[:i] for i, x in enumerate(s) if x[0] == query], [])
 			after_t = sum([s[i+1:] for i, x in enumerate(s) if x[0] == query], [])
 			if after_t == [] or before_t == []:
 				pass
 			else:
-				for i, n in enumerate(leaves):
-					if nx.dijkstra_path(G, root_name, n)[1].split(u'//')[1][:-3] == after_t[0][1]:
-						snt_divide[i].append(before_t)
-		# print pp(snt_divide)
+				after_POS = [x[1] for x in after_t]
+
+				for i, p in enumerate(p_path):
+					if len(p) > len(after_POS):
+						continue
+					elif p == after_POS[:len(p)] and len(temp_p[1]) < len(p):
+						temp_p = i, p
+
+				# print temp_p, after_POS		#ちょっと未定の調整箇所
+				
+				if temp_p[0] == -1:
+					prop_p['-'.join(after_POS)].append(before_t)
+				else:
+					snt_divide[temp_p[0]].append(before_t)
+
+		for key in prop_p.keys():
+			if len(prop_p[key]) <= 1:
+				del prop_p[key]
+
+		# pprint.pprint(prop_p)
 
 
 		i = 0
@@ -309,6 +340,31 @@ class Node:
 			Ext_Patterns.append(u'//'.join(pattern))
 
 			i += 1
+
+		# for i in range(len(Ext_Patterns)):
+			# print Ext_Patterns[i], snt_divide[i]
+
+
+		#あふれた文章をパターンとして取り直す
+		temp_index = len(Ext_Patterns)
+		for k, v in prop_p.items():
+			pattern = []
+			key = ['%s(%s)' %(k, i+1) for i, k in enumerate(k.split('-'))]
+			for path in nx.single_source_dijkstra_path(G, root_name).values():
+				path_POS = [p.split('//')[1] for p in path[1:] if not p == '1']
+				if path_POS == key:
+					for p in path:
+						if G.node[p].has_key('fontcolor'):
+							pattern.append(G.node[p]['label'].split(r'\n')[1])
+						elif G.node[p] == {}:
+							pass
+						else:
+							label = G.node[p]['label'].split(r'\n')[:-1]
+							pattern.append('<%s>:{%s}' %(label[0].split('(')[0], ', '.join(label[1:])))
+					break
+			Ext_Patterns.append(u'//'.join(pattern))
+			snt_divide[temp_index].extend(v)
+			temp_index += 1
 		return snt_divide, Ext_Patterns
 
 
